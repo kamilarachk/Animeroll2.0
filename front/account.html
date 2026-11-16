@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animeroll - Аккаунт</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button type="button" id="burgerBtn">☰</button>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="page">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="image/logo2.png" alt="Animeroll"></div>
+            <nav class="menu">
+                <a href="/" class="menu-item">Главная</a>
+                <a href="/basket" class="menu-item">Корзина</a>
+                <a href="/account" class="menu-item active">Аккаунт</a>
+                <a href="/registration" class="menu-item">Вход</a>
+                <a href="/support" class="menu-item">Поддержка</a>
+            </nav>
+        </aside>
+        
+        <main class="main">
+            <section class="opis">
+                <p><strong>Личный кабинет</strong></p>
+                <p>Здесь будет отображаться история ваших заказов, вишлист и настройки профиля.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer class="contacts">
+        <h2>Контактные данные</h2>
+        <div class="contacts-bar">
+            <div class="contact-item">
+                <span class="contact-label">Телефон:</span>
+                <a href="tel:+79690394181">+7 (969) 039-41-81</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Email:</span>
+                <a href="mailto:rakhmanova.10@yandex.ru">rakhmanova.10@yandex.ru</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Адрес:</span>
+                <span>г. Москва, Харьковский проезд, д. 5</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Telegram: </span>
+                <a href="#">@krona_tarelka5</a>
+            </div>
+        </div>
+        <p class="copyright">© Animeroll 2026</p>
+        <p class="copyright">Все права защищены</p>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burgerBtn'); 
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        burger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>

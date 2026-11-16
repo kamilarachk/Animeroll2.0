@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animeroll - Корзина</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button type="button" id="burgerBtn">☰</button>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="page">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="image/logo2.png" alt="Animeroll"></div>
+            <nav class="menu">
+                <a href="/" class="menu-item">Главная</a>
+                <a href="/basket" class="menu-item active">Корзина</a>
+                <a href="/account" class="menu-item">Аккаунт</a>
+                <a href="/registration" class="menu-item">Вход</a>
+                <a href="/support" class="menu-item">Поддержка</a>
+            </nav>
+        </aside>
+        
+        <main class="main">
+            <section class="opis">
+                <p><strong>Корзина</strong></p>
+                <div id="cart-container" style="margin-top: 20px;">
+                </div>
+                <div id="cart-total" style="margin-top: 20px; font-size: 22px; font-weight: bold; display: none;">
+                    Итого: <span id="total-price">0</span> ₽
+                </div>
+            </section>
+        </main>
+            
+    </div>
+
+    <footer class="contacts">
+        <h2>Контактные данные</h2>
+        <div class="contacts-bar">
+            <div class="contact-item">
+                <span class="contact-label">Телефон:</span>
+                <a href="tel:+79690394181">+7 (969) 039-41-81</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Email:</span>
+                <a href="mailto:rakhmanova.10@yandex.ru">rakhmanova.10@yandex.ru</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Адрес:</span>
+                <span>г. Москва, Харьковский проезд, д. 5</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Telegram: </span>
+                <a href="#">@krona_tarelka5</a>
+            </div>
+        </div>
+        <p class="copyright">© Animeroll 2026</p>
+        <p class="copyright">Все права защищены</p>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burgerBtn'); 
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+        burger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const container = document.getElementById('cart-container');
+            const totalBlock = document.getElementById('cart-total');
+            const totalPriceEl = document.getElementById('total-price');
+            
+            container.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="padding: 20px; border: 1px dashed #ccc; text-align: center; border-radius: 8px;">
+                        <p>Пока корзина пуста</p>
+                        <br>
+                        <a href="/" style="padding: 10px 20px; background: #2b2d42; color: white; text-decoration: none; border-radius: 5px;">Перейти к покупкам</a>
+                    </div>
+                `;
+                totalBlock.style.display = 'none';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                container.innerHTML += `
+                    <div style="display: flex; align-items: center; gap: 20px; padding: 15px; border-bottom: 1px solid #eee;">
+                        <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px; object-fit: contain;">
+                        <div style="flex: 1;">
+                            <h4 style="margin-bottom: 5px;">${item.name}</h4>
+                            <p style="color: #666;">${item.price} ₽</p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <button onclick="changeQuantity(${index}, -1)" style="padding: 5px 10px; cursor: pointer;">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="changeQuantity(${index}, 1)" style="padding: 5px 10px; cursor: pointer;">+</button>
+                        </div>
+                        <button onclick="removeItem(${index})" style="background: #c0392b; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">Удалить</button>
+                    </div>
+                `;
+            });
+
+            totalBlock.style.display = 'block';
+            totalPriceEl.innerText = total;
+        }
+
+        function changeQuantity(index, delta) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        renderCart();
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animeroll - Вход</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button type="button" id="burgerBtn">☰</button>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="page">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="image/logo2.png" alt="Animeroll"></div>
+            <nav class="menu">
+                <a href="/" class="menu-item">Главная</a>
+                <a href="/basket" class="menu-item">Корзина</a>
+                <a href="/account" class="menu-item">Аккаунт</a>
+                <a href="/registration" class="menu-item active">Вход</a>
+                <a href="/support" class="menu-item">Поддержка</a>
+            </nav>
+        </aside>
+        
+        <main class="main">
+            <section class="opis">
+                <p><strong>Авторизация</strong></p>
+                
+                <div id="form-container">
+                    <form id="reg-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin-top: 20px;">
+                        <input type="text" id="reg-name" name="name" placeholder="Ваше имя" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="email" id="reg-email" name="email" placeholder="Email" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <input type="password" id="reg-pass" name="password" placeholder="Пароль" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                        <button type="submit" class="btn-add" style="margin-top: 10px;">Зарегистрироваться</button>
+                    </form>
+                </div>
+
+                <div id="success-msg" style="display: none; margin-top: 20px; padding: 20px; background: #d4edda; color: #155724; border-radius: 8px; border: 1px solid #c3e6cb;">
+                    <h3>Регистрация успешна</h3>
+                    <p>Добро пожаловать в Animeroll</p>
+                    <a href="/" style="color: #155724; font-weight: bold;">Перейти на главную</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="contacts">
+        <h2>Контактные данные</h2>
+        <div class="contacts-bar">
+            <div class="contact-item">
+                <span class="contact-label">Телефон:</span>
+                <a href="tel:+79690394181">+7 (969) 039-41-81</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Email:</span>
+                <a href="mailto:rakhmanova.10@yandex.ru">rakhmanova.10@yandex.ru</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Адрес:</span>
+                <span>г. Москва, Харьковский проезд, д. 5</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Telegram: </span>
+                <a href="#">@krona_tarelka5</a>
+            </div>
+        </div>
+        <p class="copyright">© Animeroll 2026</p>
+        <p class="copyright">Все права защищены</p>
+    </footer>
+
+    <script>
+        const burger = document.getElementById('burgerBtn'); 
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        burger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        document.getElementById('reg-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+            localStorage.setItem('isLoggedIn', 'true');
+        });
+    </script>
+</body>
+</html>
