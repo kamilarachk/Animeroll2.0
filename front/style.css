@@ -316,6 +316,7 @@ hr {
 }
 
 @media (max-width: 768px) {
+@media (max-width: 768px) {
     .page {
         flex-direction: column;
     }
@@ -325,7 +326,47 @@ hr {
     }
     
     .products {
-        padding: 20px;
+        padding: 20px 10px;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .product-card {
+        border-radius: 8px;
+    }
+
+    .product-image {
+        height: 160px;
+        padding: 5px;
+    }
+
+    .product-info {
+        padding: 10px;
+    }
+
+    .product-name {
+        font-size: 13px;
+        margin-bottom: 8px;
+        -webkit-line-clamp: 2;
+    }
+
+    .product-category {
+        font-size: 10px;
+        margin-bottom: 4px;
+    }
+
+    .product-price {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .btn-add {
+        padding: 8px;
+        font-size: 12px;
     }
 
     .contacts-bar {
